@@ -11,8 +11,10 @@ nest start --watch
 ```
 ## Docker
 If you would like start this app with DB  in Docker make next steps:
-```
+
 For run application in Docker Compose with database execute next command:
 ```
 docker compose up
 ```
+But in default application use local DB. If you would like to use Docker DB, 
+you need to change the connection to the database in the .env file.
