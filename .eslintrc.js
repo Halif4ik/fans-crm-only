@@ -22,4 +22,12 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
   },
+  overrides: [
+    {
+      files: ['*.ts'], // Apply to TypeScript files
+      rules: {
+        'prettier/prettier': 'off', // Disable prettier rule for TypeScript files
+      },
+    },
+  ],
 };
