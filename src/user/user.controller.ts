@@ -7,7 +7,7 @@ import {
   ValidationPipe,
   UsePipes,
   UseGuards,
-  Param
+  Param, ParseIntPipe
 } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { CreateUserDto } from "./dto/create-user.dto";
@@ -27,6 +27,7 @@ import { User } from "./entities/user.entity";
 import { AuthGuard } from "@nestjs/passport";
 import { UserDec } from "../auth/decor-pass-user";
 import { GeneralResponse } from "./interface/generalResponse.interface";
+import { JwtAuthAccessGuard } from "../auth/jwt-Access.guard";
 
 @ApiTags("CRUD User")
 @Controller("/api/v1")
@@ -69,8 +70,9 @@ export class UserController {
     type: ResponseUserInfo
   })
   @ApiOperation({ summary: "Get User info by id" })
-  @UseGuards(AuthGuard(["jwt-auth"]))
-  async findUserById(@UserDec() userFromGuard: User, @Param("id") id: number): Promise<User> {
+ /* @UseGuards(AuthGuard("jwt-auth"))*/
+  @UseGuards(JwtAuthAccessGuard)
+  async findUserById(@UserDec() userFromGuard: User, @Param('id', ParseIntPipe) id: number): Promise<User> {
     return this.userService.findUserById(userFromGuard, id);
   }
 }

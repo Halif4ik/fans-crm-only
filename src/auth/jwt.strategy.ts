@@ -21,9 +21,12 @@ export class JwtStrategyAuth extends PassportStrategy(Strategy, 'jwt-auth') {
   }
 
   async validate(payload: unknown): Promise<User | null> {
+    console.log("strategy-", payload);
+
     if (typeof payload !== 'object' || payload === null) return null;
     // jwt Payload is missing a required property and this point, payload is of type TJwtBody
     const requiredProperties: (keyof TJwtBody)[] = ['id', 'email', 'firstName'];
+
     for (const prop of requiredProperties) {
       if (!(prop in payload)) return null;
       if (prop === 'id' && typeof payload[prop] !== 'number') return null;

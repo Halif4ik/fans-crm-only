@@ -5,7 +5,7 @@ import {ApiBadRequestResponse, ApiOkResponse, ApiOperation, ApiTags} from "@nest
 import {AuthResponse, WrongAuthResponse} from "./dto/responce-auth.dto";
 
 @ApiTags('Create Auth')
-@Controller('/api/auth')
+@Controller('/api/v1/auth')
 export class AuthController {
    constructor(private readonly authService: AuthService) {
    }
